@@ -17,6 +17,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.text.length) {
+      alert("添加项内容不能为空！")
       return;
     }
     const newItem = {
@@ -35,7 +36,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <div class="container">
+        <div className="container">
           <div>
             <h2>React To Do List</h2>
             <p>
@@ -43,7 +44,7 @@ class App extends Component {
             </p>
           </div>
           <div>
-            <input class="input-text" type="text" name="ListItem" 
+            <input className="input-text" type="text" name="ListItem" 
               onChange={this.handleChange}
             value={this.state.text}/>
             <div id="button" onClick={this.handleSubmit}>Add</div>
@@ -53,13 +54,13 @@ class App extends Component {
           <div>
             <ul id="filters">
               <li>
-                <a href="javascript:" data-filter="all" class="selected">ALL</a>
+                <a href="javascript:" data-filter="all" className="selected">ALL</a>
               </li>
               <li>
-                <a href="javascript:" data-filter="active" class="">Active</a>
+                <a href="javascript:" data-filter="active" className="">Active</a>
               </li>
               <li>
-                <a href="javascript:" data-filter="complete" class="">Complete</a>
+                <a href="javascript:" data-filter="complete" className="">Complete</a>
               </li>
             </ul>
           </div>
@@ -70,12 +71,28 @@ class App extends Component {
 }
 
 class ListItems extends Component{
+  constructor(props) {
+    super(props);
+    this.handleCheck = this.handleCheck.bind(this);
+    this.handleDoubleClick = this.handleDoubleClick.bind(this);
+  }
+  //复选框勾选
+  handleCheck(e){
+    if(e.target.checked){
+      e.target.parentNode.classList.add("checked");
+    }else{
+      e.target.parentNode.classList.remove("checked");
+    }
+  }
+  handleDoubleClick(e){
+    e.target.setAttribute("contentEditable",true);
+  }
   render(){
     return (
       <ol id="list-box">
         {this.props.items.map(item => (
-          <li key={item.id} class="list-item">
-            <input name="done-todo" type="checkbox" class="done-todo"/>
+          <li key={item.id} className="list-item" onDoubleClick={this.handleDoubleClick}>
+            <input name="done-todo" type="checkbox" className="done-todo" onClick={this.handleCheck}/>
             {item.text}
           </li>
         ))}
