@@ -84,6 +84,7 @@ class ListItems extends Component{
       e.target.parentNode.classList.remove("checked");
     }
   }
+  //处理双击可编辑
   handleDoubleClick(e){
     e.target.setAttribute("contentEditable",true);
   }
