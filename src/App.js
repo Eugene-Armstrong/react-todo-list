@@ -52,17 +52,7 @@ class App extends Component {
           <br />
           <ListItems items={this.state.items} />
           <div>
-            <ul id="filters">
-              <li>
-                <a href="javascript:" data-filter="all" className="selected">ALL</a>
-              </li>
-              <li>
-                <a href="javascript:" data-filter="active" className="">Active</a>
-              </li>
-              <li>
-                <a href="javascript:" data-filter="complete" className="">Complete</a>
-              </li>
-            </ul>
+            <FilterButtons />
           </div>
         </div>
       </div>
@@ -99,6 +89,24 @@ class ListItems extends Component{
         ))}
       </ol>
     );
+  }
+}
+
+class FilterButtons extends Component{
+  render(){
+    return(
+      <ul id="filters">
+              <li>
+                <a href="javascript:" data-filter="all" className="selected">ALL</a>
+              </li>
+              <li>
+                <a href="javascript:" data-filter="active" className="">Active</a>
+              </li>
+              <li>
+                <a href="javascript:" data-filter="complete" className="">Complete</a>
+              </li>
+            </ul>
+    )
   }
 }
 export default App;
